@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiProperty;
+Use App\Controller\ImageFtypeController;
 
 /**
  * Image
@@ -16,7 +18,54 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity
  * @ApiResource(
  *     normalizationContext={"groups" = {"read"}},
- *     denormalizationContext={"groups" = {"write"}}
+ *     denormalizationContext={"groups" = {"write"}},
+ *     collectionOperations={
+ *     "get",
+ *     "post" = {
+ *       "controller" = ImageFtypeController::class,
+ *       "deserialize" = false,
+ *        "openapi_context" = {
+ *         "requestBody" = {
+ *           "description" = "File upload to an existing resource (image)",
+ *           "required" = true,
+ *           "content" = {
+ *             "multipart/form-data" = {
+ *               "schema" = {
+ *                 "type" = "object",
+ *                 "properties" = {
+ *                   "title" = {
+ *                     "description" = "The title of the image",
+ *                     "type" = "string",
+ *                     "example" = "Fajne zdj z wakacji",
+ *                   },
+ *                   "author" = {
+ *                     "description" = "The author of the image",
+ *                     "type" = "string",
+ *                     "example" = "Jan Kos",
+ *                   },
+ *                   "description" = {
+ *                     "description" = "The description of the image",
+ *                     "type" = "string",
+ *
+ *                   },
+ *                     "album" = {
+ *                     "description" = "The album's id",
+ *                     "type" = "string",
+ *                     "example" = "2",
+ *                   },
+ *                   "ftype" = {
+ *                     "type" = "string",
+ *                     "format" = "binary",
+ *                     "description" = "Upload the image",
+ *                   },
+ *                 },
+ *               },
+ *             },
+ *           },
+ *         },
+ *       },
+ *        }
+ *      }
  * )
  */
 class Image
@@ -39,13 +88,22 @@ class Image
      */
     private $title = 'NULL';
 
+
     /**
-     * @var string|null
+     * @param string $ftype
      *
-     * @ORM\Column(name="ftype", type="string", length=32, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="ftype", type="string", length=32)
      * @Groups({"read", "write"})
+     * @ApiProperty(
+     *   iri="https://schema.org/image",
+     *   attributes={
+     *     "openapi_context"={
+     *       "type"="string",
+     *     }
+     *   }
+     * )
      */
-    private $ftype = 'NULL';
+    private $ftype = null;
 
     /**
      * @var string|null
@@ -66,14 +124,13 @@ class Image
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="created_at", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="created_at", type="date", nullable=true)
      * @Groups({"read"})
      */
-    private $createdAt = 'NULL';
+    private $createdAt = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="images")
-     * @Groups({"read", "write"})
      */
     private $tags;
 
@@ -86,7 +143,6 @@ class Image
 
     /**
      * @ORM\OneToMany(targetEntity=PrimaryComment::class, mappedBy="image")
-     * @Groups({"read"})
      */
     private $p_comments;
 

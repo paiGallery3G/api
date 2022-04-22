@@ -8,9 +8,7 @@
       <path value="$PROJECT_DIR$/my_rest_api/vendor/symfony/var-exporter" />
       <path value="$PROJECT_DIR$/my_rest_api/vendor/willdurand/negotiation" />
       <path value="$PROJECT_DIR$/my_rest_api/vendor/symfony/polyfill-intl-grapheme" />
-      <path value="$PROJECT_DIR$/my_rest_api/vendor/laminas/laminas-eventmanager" />
       <path value="$PROJECT_DIR$/my_rest_api/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/my_rest_api/vendor/laminas/laminas-zendframework-bridge" />
       <path value="$PROJECT_DIR$/my_rest_api/vendor/symfony/cache" />
       <path value="$PROJECT_DIR$/my_rest_api/vendor/friendsofphp/proxy-manager-lts" />
       <path value="$PROJECT_DIR$/my_rest_api/vendor/laminas/laminas-code" />
@@ -88,7 +86,9 @@
       <path value="$PROJECT_DIR$/my_rest_api/vendor/symfony/runtime" />
       <path value="$PROJECT_DIR$/my_rest_api/vendor/symfony/maker-bundle" />
       <path value="$PROJECT_DIR$/my_rest_api/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/my_rest_api/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/my_rest_api/vendor/symfony/mime" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
 </project>

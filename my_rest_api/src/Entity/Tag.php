@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
  * Tag
@@ -58,18 +59,20 @@ class Tag
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="created_at", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="created_at", type="date", nullable=true)
      * @Groups({"read"})
      */
-    private $createdAt = 'NULL';
+    private $createdAt = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=Album::class, mappedBy="tags")
+     * @Groups({"read", "write"})
      */
     private $albums;
 
     /**
      * @ORM\ManyToMany(targetEntity=Image::class, mappedBy="tags")
+     * @Groups({"read", "write"})
      */
     private $images;
 
@@ -85,7 +88,7 @@ class Tag
      */
     public function updatedTimestamps()
     {
-        if ($this->createdAt == NULL or $this->createdAt == 'NULL') {
+        if ($this->createdAt == null or $this->createdAt == 'NULL') {
             $this->createdAt = new \DateTime('now');
         }
     }

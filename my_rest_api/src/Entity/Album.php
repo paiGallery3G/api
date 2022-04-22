@@ -58,20 +58,18 @@ class Album
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="created_at", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="created_at", type="date", nullable=true)
      * @Groups({"read"})
      */
-    private $createdAt = 'NULL';
+    private $createdAt = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="albums")
-     * @Groups({"read", "write"})
      */
     private $tags;
 
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="album")
-     * @Groups({"read"})
      */
     private $images;
 

@@ -55,10 +55,10 @@ class PrimaryComment
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="created_at", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="created_at", type="date", nullable=true)
      * @Groups({"read"})
      */
-    private $createdAt = 'NULL';
+    private $createdAt = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Image::class, inversedBy="p_comments")
@@ -69,7 +69,6 @@ class PrimaryComment
 
     /**
      * @ORM\OneToMany(targetEntity=SecondaryComment::class, mappedBy="primaryComment")
-     * @Groups({"read"})
      */
     private $s_comments;
 

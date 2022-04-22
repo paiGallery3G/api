@@ -56,15 +56,14 @@ class SecondaryComment
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="created_at", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="created_at", type="date", nullable=true)
      * @Groups({"read"})
      */
-    private $createdAt = 'NULL';
+    private $createdAt = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=PrimaryComment::class, inversedBy="s_comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"write"})
      */
     private $primaryComment;
 
